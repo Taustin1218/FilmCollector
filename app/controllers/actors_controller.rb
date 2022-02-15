@@ -18,14 +18,14 @@ class ActorsController < ApplicationController
 	# create method gets called when the Create button is pushed on
 	# the actors new.html.erb.
 	def create
-		# call constructor of ACtor model class giving it the 
+		# call constructor of Actor model class giving it the 
 		# first name and last name parameters input in the actors
 		# new.html.erb
 		# constructco creates Actor model object which is stored
 		# in variable
 		actor = Actor.new(actor_params)
 		# call save method on Actor object
-		# save method inserts the data in the ACtor model object
+		# save method inserts the data in the Actor model object
 		# into the actor table
 		if actor.save
 			# if the save method succeeds, request the actors URL
@@ -40,6 +40,19 @@ class ActorsController < ApplicationController
 			# which will rendor the actors new.html.erb in the browser
 			redirect_to "/actors/new"
 		end 
+	end
+
+	# show method gets called when the actors/:id URL is requested
+	# show method is mapped to the actors show.html.erb
+	def show
+		# call find method on Actor model class giving it the id sent
+		# in the request
+		# find method selects all of the data in the actor table where
+		# the id is equal to the id sent in the request 
+		# selected data will be returned in an array of movie objects
+		# store the array of movie objects in an instace variable
+		# instance variable is available to actors show.html.erb
+		@movies = Actor.find(params[:id]).movies
 	end
 
 	private
